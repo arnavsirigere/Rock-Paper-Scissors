@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors With Your Hands</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body style="background-color: rgba(51, 51, 51); font-family: sans-serif;">
+    <div id="instructions" class="instructions">
+      <p>
+        Use your left hand to create the gestures as shown and make sure you are out of the camera view. <br />
+        Keep your hand as close to the camera such that it takes up most of the view. <br />
+        Try to keep the background a solid color, preferably white. After pressing start, you go on Scissors! It may lag a little when you play the first round!
+      </p>
+      <h2>Gestures</h2>
+      <div>
+        <image width="150" height="150" src="assets/rock-example.png"></image>
+        <image width="150" height="150" src="assets/paper-example.png"></image>
+        <image width="150" height="150" src="assets/scissors-example.png"></image>
+      </div>
+      <hr />
+    </div>
+    <div id="scores" class="scores">
+      <p class="text" id="user">Your Score : 0</p>
+      <p class="text" id="ai">My Score : 0</p>
+    </div>
+    <div class="indicator" id="indicator">
+      <button id="start-button" class="start-button">START!</button>
+      <p id="indicator-text"></p>
+    </div>
+    <div id="attribution" class="attribution">
+      <p>A huge thanks to <a class="link" href="http://www.laurencemoroney.com/rock-paper-scissors-dataset/">Laurence Moroney</a> for the rps dataset!</p>
+      <p>Sound by <a class="link" href="https://zapsplat.com">Zapsplat.com</a></p>
+    </div>
+    <div id="winner-list"></div>
+    <div class="stop-button" id="stop-button"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script>
+    <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+    <script src="sketch.js"></script>
+    <script src="move.js"></script>
+    <script src="fireworks/fireworks-handler.js"></script>
+    <script src="fireworks/firework.js"></script>
+    <script src="fireworks/particle.js"></script>
+  </body>
+</html>
