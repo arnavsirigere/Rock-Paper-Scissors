@@ -215,7 +215,8 @@ function playRound(err, result) {
   } else {
     let userSelection = result[0].label.toLowerCase();
     userSelections.push(userSelection);
-    let aiOption = markovGuess(userSelection, userSelections);
+    let prediction = predictMove(userSelection, userSelections.slice().splice(0, userSelections.length - 1));
+    let aiOption = gameMechanics[prediction];
     animation = true;
     user = new Move(userSelection, images[0], 1);
     ai = new Move(aiOption, images[1], -1);
@@ -226,27 +227,26 @@ String.prototype.format = function () {
   return this.slice(0, 1).toUpperCase() + this.slice(1, this.length);
 };
 
-function markovGuess(userSelection, userSelections) {
-  if (round == 1) {
+function predictMove(prevMove, history) {
+  if (history.length < 2) {
     return randomMove();
   }
   let ngrams = {};
-  for (let i = 0; i < userSelections.length - 1; i++) {
-    let selection = userSelections[i];
+  for (let i = 0; i < history.length - 1; i++) {
+    let selection = history[i];
     if (!ngrams[selection]) {
       ngrams[selection] = [];
     }
-    ngrams[selection].push(userSelections[i + 1]);
+    ngrams[selection].push(history[i + 1]);
   }
-  let moves = ngrams[userSelection];
-  let nextMovePrediction;
+  let moves = ngrams[prevMove];
+  let prediction;
   if (moves) {
-    nextMovePrediction = random(ngrams[userSelection]);
+    prediction = random(ngrams[prevMove]);
   } else {
-    nextMovePrediction = markovGuess(userSelections[userSelections.length - 2], userSelections);
+    prediction = predictMove(history[history.length - 2], history);
   }
-  let defeaterMove = gameMechanics[nextMovePrediction];
-  return defeaterMove;
+  return prediction;
 }
 
 function randomMove() {
